@@ -1,0 +1,55 @@
+name: Auto Merge Submissions
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name != github.repository
+
+    steps:
+      # ✅ Step 1: Checkout repository (full history so .git exists)
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Important: ensures .git folder is present
+
+      # ✅ Step 2: Install GitHub CLI
+      - name: Setup GitHub CLI
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y gh jq
+
+      # ✅ Step 3: Check changed files in the PR
+      - name: Check if only files in submissions folder are changed
+        id: check
+        run: |
+          echo "Fetching changed files for PR #${{ github.event.pull_request.number }}..."
+          CHANGED_FILES=$(gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files --jq '.[].filename')
+          echo "Changed files: $CHANGED_FILES"
+
+          if echo "$CHANGED_FILES" | grep -v "^submissions/"; then
+            echo "❌ Non-submission files changed."
+            echo "merge=false" >> $GITHUB_OUTPUT
+          else
+            echo "✅ All files are in submissions folder."
+            echo "merge=true" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ✅ Step 4: Auto-merge PR if valid
+      - name: Auto merge PR
+        if: steps.check.outputs.merge == 'true'
+        run: |
+          echo "Merging PR #${{ github.event.pull_request.number }}..."
+          gh pr merge ${{ github.event.pull_request.number }} --merge --admin --delete-branch --body "🎆 Auto-merged by GitLit Bot — submissions folder verified!"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
