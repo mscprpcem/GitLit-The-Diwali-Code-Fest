@@ -1,0 +1,125 @@
+import java.util.*;
+
+
+import java.io.IOException;
+
+
+public class d{
+
+    // ANSI escape codes for colors
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String BRIGHT_YELLOW = "\u001B[93m";
+    public static final String BRIGHT_WHITE = "\u001B[97m";
+
+    // Clear the console screen
+    public static void clearScreen() {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (IOException | InterruptedException e) {
+            // In case clear screen is not supported, just print a newline
+            System.out.println("\n".repeat(50));
+        }
+    }
+
+    // ASCII art frames
+    public static final String[] diyaFrames = {
+        
+        // Frame 1: Diya with small flame
+         " " + BRIGHT_YELLOW + " . " + RESET + " \n" + 
+         " " + YELLOW + " / \\ " + RESET + " \n" + 
+         " " + BRIGHT_YELLOW + " / \\ " + RESET + " \n" +
+          " " + PURPLE + " \\_/" + RESET + " \n" +
+           " " + PURPLE + " ( )" + RESET + " \n" + " " + 
+           PURPLE + " /___\\ " + RESET + " \n",
+        // Frame 2: Diya with large flame
+        "      " + YELLOW + "  , . " + RESET + "     \n" +
+        "    " + BRIGHT_YELLOW + " /`|'\\ " + RESET + "   \n" +
+        "   " + YELLOW + " /  |  \\ " + RESET + "  \n" +
+        "   " + PURPLE + "  \\_/" + RESET + "    \n" +
+        "  " + PURPLE + "  ( )" + RESET + "    \n" +
+        " " + PURPLE + " /___\\ " + RESET + "  \n",
+    };
+
+    public static final String[] fireworkFrames = {
+        // Frame 1: Small burst
+        "      " + RED + "  .  " + RESET + "      \n",
+
+        // Frame 2: Medium burst
+        "    " + BRIGHT_YELLOW + "  *  " + RESET + "      \n" +
+        "    " + BRIGHT_YELLOW + ".*." + RESET + "      \n" +
+        "     " + BRIGHT_YELLOW + " * " + RESET + "      \n",
+
+        // Frame 3: Large burst
+        "    " + CYAN + "  \\ /" + RESET + "      \n" +
+        "  " + CYAN + "-- * --" + RESET + "    \n" +
+        "    " + CYAN + "  / \\" + RESET + "      \n",
+
+        // Frame 4: Scattered burst
+        "   " + PURPLE + "  .   " + RESET + "      \n" +
+        " " + YELLOW + " * " + RESET + " " + BRIGHT_YELLOW + ". " + RESET + " " + PURPLE + "  *  \n" +
+        "      " + CYAN + " .  " + RESET + "   \n",
+
+        // Frame 5: Reset
+        "                  \n"
+    };
+
+    public static void main(String[] args) throws InterruptedException {
+        int animationDuration = 5; // seconds
+        long startTime = System.currentTimeMillis();
+
+        while ((System.currentTimeMillis() - startTime) / 1000.0 < animationDuration) {
+            clearScreen();
+
+            // Happy Diwali fading text
+            String diwaliText = "Happy Diwali";
+            int delay = 150; // milliseconds
+            for (int i = 0; i < diwaliText.length(); i++) {
+                System.out.print(BLUE + diwaliText.substring(0, i + 1) + RESET);
+                Thread.sleep(delay);
+            }
+            Thread.sleep(1000); // Pause
+
+            clearScreen();
+
+            // Diya and fireworks animation
+            for (int i = 0; i < 15; i++) {
+                clearScreen();
+
+                // Draw Diya with flickering flame
+                int diyaFrameIndex = i % 2;
+                System.out.println(diyaFrames[diyaFrameIndex]);
+
+                // Randomly display fireworks
+                if (Math.random() > 0.7) {
+                    int fireworkFrameIndex = (int) (Math.random() * fireworkFrames.length);
+                    System.out.println(fireworkFrames[fireworkFrameIndex]);
+                } else {
+                    System.out.println("\n\n\n\n"); // Keep spacing consistent
+                }
+
+                Thread.sleep(250); // Pause between frames
+            }
+        }
+
+        // Final celebratory message with gifts and emojis
+        clearScreen();
+        System.out.println("\n\n");
+        System.out.println(BRIGHT_YELLOW + " *Happy Diwali!*" + RESET);
+        System.out.println(RED + "May your life be filled with prosperity and light!" + RESET);
+        System.out.println(PURPLE + " Wishing you and your family a safe and happy festival. " + RESET);
+        System.out.println("\n");
+        
+        System.out.println("\n\n");
+    }
+
+}
