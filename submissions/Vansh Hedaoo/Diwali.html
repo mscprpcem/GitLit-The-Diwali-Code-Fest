@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Diwali 2025 🎆</title>
+
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <style>
+    :root {
+      --gold1: #ffd95a;
+      --gold2: #ffb84d;
+      --bg1: #0a0a0a;
+      --bg2: #24003a;
+      --bg3: #3d0060;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      height: 100%;
+      font-family: "Poppins", system-ui, sans-serif;
+      background: linear-gradient(45deg, var(--bg1), var(--bg2), var(--bg3));
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease-in-out infinite;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; text-shadow: 0 0 50px #ffd95a, 0 0 120px #ffb84d; }
+      50% { background-position: 100% 50%; text-shadow: 0 0 125px #fff2b2, 0 0 140px #ffd95a;}
+      100% { background-position: 0% 50%; text-shadow: 0 0 110px #ffd95a, 0 0 120px #ffb84d;}
+    }
+
+    #fireworks {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .scene {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2vh;
+      padding: 1rem;
+      width: 100%;
+      max-width: 90vw;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 8vw, 6rem);
+      margin: 0;
+      color: #fff;
+      letter-spacing: 0.1em;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px #ffcc00, 0 0 24px #ff9900, 0 0 36px #ff6600;
+    }
+
+    h1 span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .diyas {
+      display: flex;
+      gap: clamp(1rem, 4vw, 3rem);
+      font-size: clamp(2rem, 5vw, 4rem);
+      text-shadow: 0 0 18px #ffcc00;
+    }
+
+    .tagline {
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      color: #ffd95a;
+      text-shadow: 0 0 10px #ffd95a, 0 0 20px #ffb84d;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+      animation: shimmer 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes shimmer {
+      0% { text-shadow: 0 0 10px #ffd95a, 0 0 20px #ffb84d; transform: scale(1); }
+      50% { text-shadow: 0 0 25px #fff2b2, 0 0 40px #ffd95a; transform: scale(1.001); }
+      100% { text-shadow: 0 0 10px #ffd95a, 0 0 20px #ffb84d; transform: scale(1); }
+    }
+
+    .music-btn {
+      position: fixed;
+      bottom: 2vh;
+      right: 2vw;
+      z-index: 5;
+      background: linear-gradient(180deg, var(--gold1), var(--gold2));
+      border: none;
+      border-radius: 999px;
+      padding: 0.6rem 1.4rem;
+      font-weight: 700;
+      font-size: clamp(0.8rem, 2vw, 1rem);
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(255,150,0,0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255,180,0,0.6);
+    }
+
+    .lantern {
+      position: absolute;
+      width: clamp(18px, 4vw, 40px);
+      height: clamp(28px, 6vh, 60px);
+      border-radius: 20px 20px 10px 10px;
+      background: radial-gradient(circle at bottom, #ff9b33, #ff3b2b);
+      box-shadow: 0 0 18px rgba(255,155,51,0.85);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .lantern::after {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(6px, 1vw, 10px);
+      height: clamp(6px, 1vw, 10px);
+      background: #ffd700;
+      border-radius: 50%;
+      box-shadow: 0 0 16px #ffd700;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="fireworks"></canvas>
+
+  <div class="scene">
+    <h1 id="diwali-text">
+      <span>H</span><span>a</span><span>p</span><span>p</span><span>y</span>
+      <span>&nbsp;</span>
+      <span>D</span><span>i</span><span>w</span><span>a</span><span>l</span><span>i</span>
+    </h1>
+    <div class="diyas">🪔 🪔 🪔</div>
+    <div class="tagline" id="tagline">✨ Celebrate light, love & prosperity ✨</div>
+  </div>
+
+  <button class="music-btn" id="playMusic">🔔 Play Music</button>
+
+  <audio id="diwali-music" loop preload="auto">
+    <source src="diwali.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    
+    const fwCanvas = document.getElementById("fireworks");
+    const fw = fwCanvas.getContext("2d");
+
+    function resizeFW() {
+      fwCanvas.width = innerWidth * devicePixelRatio;
+      fwCanvas.height = innerHeight * devicePixelRatio;
+      fw.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    }
+    resizeFW();
+    addEventListener("resize", resizeFW);
+
+    class Firework {
+      constructor(x, y, color) {
+        this.x = x; this.y = y; this.color = color;
+        this.particles = [];
+        for (let i = 0; i < 40; i++) {
+          const a = Math.random() * Math.PI * 2;
+          const s = Math.random() * 3 + 1.5;
+          this.particles.push({x, y, vx: Math.cos(a)*s, vy: Math.sin(a)*s, life:1});
+        }
+      }
+      update() {
+        this.particles.forEach(p=>{
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.05;
+          p.life -= 0.02;
+        });
+        this.particles = this.particles.filter(p=>p.life>0);
+      }
+      draw(ctx){
+        this.particles.forEach(p=>{
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(${this.color},${p.life})`;
+          ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+          ctx.fill();
+        });
+      }
+    }
+
+    let fireworks = [];
+    function animateFW() {
+      requestAnimationFrame(animateFW);
+      fw.fillStyle = "rgba(0,0,0,0.12)";
+      fw.fillRect(0, 0, innerWidth, innerHeight);
+      if(Math.random()<0.05){
+        fireworks.push(new Firework(
+          Math.random()*innerWidth,
+          Math.random()*innerHeight*0.5,
+          `${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)}`
+        ));
+      }
+      fireworks.forEach(f=>{f.update();f.draw(fw);});
+      fireworks = fireworks.filter(f=>f.particles.length>0);
+    }
+    animateFW();
+
+    
+    function getLanternCount() {
+      if (innerWidth < 600) return 5;
+      if (innerWidth < 900) return 8;
+      return 12;
+    }
+
+    function createLanterns() {
+      const num = getLanternCount();
+      for(let i=0;i<num;i++){
+        const l=document.createElement("div");
+        l.className="lantern";
+        document.body.appendChild(l);
+        const x=Math.random()*innerWidth;
+        const y=innerHeight+Math.random()*150;
+        const s=0.6+Math.random()*0.6;
+        gsap.set(l,{x,y,scale:s,opacity:0});
+        gsap.to(l,{opacity:0.9,duration:1,delay:Math.random()*2});
+        gsap.to(l,{
+          y:-100,
+          x:x+(Math.random()*200-100),
+          rotation:(Math.random()-0.5)*20,
+          duration:15+Math.random()*10,
+          repeat:-1,
+          ease:"sine.inOut"
+        });
+      }
+    }
+    createLanterns();
+    addEventListener("resize", ()=> {
+      document.querySelectorAll(".lantern").forEach(l=>l.remove());
+      createLanterns();
+    });
+
+    
+    const btn=document.getElementById("playMusic");
+    const music=document.getElementById("diwali-music");
+    let playing=false;
+
+    btn.addEventListener("click", ()=>{
+      if(!playing){
+        music.play().catch(()=>{});
+        btn.textContent="🔇 Stop Music";
+      }else{
+        music.pause();
+        btn.textContent="🔔 Play Music";
+      }
+      playing=!playing;
+    });
+
+    document.body.addEventListener("click", ()=>{
+      if(!playing){
+        music.play().catch(()=>{});
+        btn.textContent="🔇 Stop Music";
+        playing=true;
+      }
+    }, { once:true });
+
+    
+    const letters = document.querySelectorAll("#diwali-text span");
+    gsap.to(letters, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      stagger: 0.15,
+      ease: "back.out(1.7)"
+    });
+
+    const tagline = document.getElementById("tagline");
+    gsap.to(tagline, {
+      opacity: 1,
+      y: 0,
+      delay: 3,
+      duration: 1.2,
+      ease: "power2.out"
+    });
+  </script>
+</body>
+</html>
