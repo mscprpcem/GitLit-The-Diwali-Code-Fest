@@ -12,6 +12,8 @@ Here are the amazing developers whose contributions lit up this Diwali Code Fest
 |----------------|-----------------------|----------------------|----------------------|----------------|
 | **Amit Kumar Yadav** | [@amityadav-72](https://github.com/amityadav-72) | [HappyDiwali.java](submissions/AmitYadav/HappyDiwali.java) |  Java | ✅ Merged |
 | **(Amit Yadav)** | [@amityadav-72](https://github.com/amityadav-72) | [HappyDiwali.java](submissions/AmitKumarYadav/HappyDiwali.java) |  Java | ✅ Merged |
+| **Vaishnavi S Nimbalkar** | [@Vaishnavi-s-nimbalkar](https://github.com/Vaishnavi-s-nimbalkar) | [HappyDiwali.py](submissions/Vaishnavi-s-nimbalkar%20/HappyDiwali.py) |  Python | ✅ Merged |
+
 
 
 > 🪔 **Note:** Once your Pull Request (PR) is merged, your name will appear here automatically in the next update!
