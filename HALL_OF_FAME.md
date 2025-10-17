@@ -13,8 +13,10 @@ Here are the amazing developers whose contributions lit up this Diwali Code Fest
 | **Amit Kumar Yadav** | [@amityadav-72](https://github.com/amityadav-72) | [HappyDiwali.java](submissions/AmitYadav/HappyDiwali.java) |  Java | ✅ Merged |
 | **(Amit Yadav)** | [@amityadav-72](https://github.com/amityadav-72) | [HappyDiwali.java](submissions/AmitKumarYadav/HappyDiwali.java) |  Java | ✅ Merged |
 | **Vaishnavi S Nimbalkar** | [@Vaishnavi-s-nimbalkar](https://github.com/Vaishnavi-s-nimbalkar) | [HappyDiwali.py](submissions/Vaishnavi-s-nimbalkar%20/HappyDiwali.py) |  Python | ✅ Merged |
-| **(Anakul Vikhe** | [@congratscool-ai](https://github.com/congratscool-ai) | [HappyDiwali.java](submissions/Anakul%20Vikhe/Happy%20Diwali.java) |  Java | ✅ Merged |
-
+| **Anakul Vikhe** | [@congratscool-ai](https://github.com/congratscool-ai) | [HappyDiwali.java](submissions/Anakul%20Vikhe/Happy%20Diwali.java) |  Java | ✅ Merged |
+| **Munazir Ansari** | [@Munazir151](https://github.com/Munazir151) | [HappyDiwali.html](submissions/Munazir%20Ansari/HappyDiwali.html) |  HTML | ✅ Merged |
+| **Vansh Hedaoo** | [@vanshhedaoo29](https://github.com/vanshhedaoo29) | [Diwali.html](submissions/Vansh%20Hedaoo/Diwali.html) |  HTML | ✅ Merged |
+| **Roshani Chandak** | [@roshanichandak4-tech](https://github.com/roshanichandak4-tech) | [diwali.java](submissions/ROSHANICHANDAK/diwali) |  Java | ✅ Merged |
 
 
 > 🪔 **Note:** Once your Pull Request (PR) is merged, your name will appear here automatically in the next update!
