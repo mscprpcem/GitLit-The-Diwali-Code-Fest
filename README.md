@@ -229,7 +229,7 @@ If you face issues:
 
 - 🔗 **GitHub Repository:** [mscprpcem/GitLit-The-Diwali-Code-Fest](https://github.com/mscprpcem/GitLit-The-Diwali-Code-Fest)  
 - 🪔 **Meetup Registration:** [Join on Meetup](https://www.meetup.com/global-ai-amravati/events/311534762/)  
-- 💼 **LinkedIn:** [MLSC PRPCEM](https://www.linkedin.com/company/mscprpcem)  
+- 💼 **LinkedIn:** [MSC PRPCEM](https://www.linkedin.com/company/mscprpcem)  
 - 📧 **Email:** mlsc@prpotepatilengg.ac.in  
 
 ---
