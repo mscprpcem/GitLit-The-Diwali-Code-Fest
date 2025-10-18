@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨ Happy Diwali ✨</title>
+  
+  
+  
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: radial-gradient(circle at bottom, #1b0a2a, #000);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      perspective: 1000px;
+      color: #fff;
+      overflow: hidden;
+    }
+
+
+
+
+    h1 {
+      position: absolute;
+      top: 30px;
+      font-size: 3rem;
+      text-align: center;
+      color: #ff6fbf; 
+      text-shadow: 0 0 20px #ff1493, 0 0 40px #ff69b4;
+      width: 100%;
+    }
+
+    .card-container {
+      width: 400px;
+      height: 250px;
+      perspective: 1000px;
+    }
+
+
+
+    .card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s;
+    }
+
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+
+
+
+    .card-side {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      background: rgba(255, 248, 240, 0.1);
+      border: 2px solid rgba(255, 111, 97, 0.4);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(255, 111, 97, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      backface-visibility: hidden;
+      padding: 20px;
+      text-align: center;
+    }
+    
+
+    .card-front p {
+      font-size: 1.3rem;
+      color: #7fffd4;
+      text-shadow: 0 0 5px #00ffff;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .card-front input {
+      width: 70%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      margin-top: 15px;
+      text-align: center;
+      font-size: 1.1rem;
+      background-color: #ffe5b4; 
+      color: #333;
+      font-weight: bold;
+    }
+
+          .card-front button {
+      margin-top: 15px;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      background: linear-gradient(45deg, #ff4500, #ff1493); 
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff4500;
+      transition: 0.3s;
+    }
+
+   .card-front button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ff1493;
+    }
+
+        .card-back {
+      transform: rotateY(180deg);
+      font-size: 1.5rem;
+      color: #ffd700; 
+      text-shadow: 0 0 10px #ffeb3b, 0 0 25px #ffc107;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+ #countdown {
+      margin-top: 15px;
+      font-size: 1rem;
+      color: #dda0dd;
+      text-shadow: 0 0 5px #ba55d3;
+    }
+    
+    
+
+  canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+            footer {
+      position: absolute;
+      bottom: 10px;
+      color: #ff7f50; 
+      font-size: 0.9rem;
+    }
+  </style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</head>
+<body>
+  <canvas id="fireworks"></canvas>
+
+  <h1>✨ Happy Diwali ✨</h1>
+
+  <div class="card-container">
+    <div class="card" id="card">
+      <div class="card-side card-front">
+        <p>Enter your name to get your Diwali wish 🪔</p>
+        <input type="text" id="nameInput" placeholder="Your Name">
+        <button onclick="flipCard()">Light Up!</button>
+      </div>
+      <div class="card-side card-back" id="message"></div>
+    </div>
+    <div id="countdown"></div>
+  </div>
+  
+  
+  
+
+  <footer>~ by Aditi Deshmukh</footer>
+
+  <script>
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = window.innerWidth;
+    let h = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; });
+
+    const particles = [];
+    function random(min,max){return Math.random()*(max-min)+min;}
+    function createFirework(){
+      const x = random(0,w); const y = random(h/2,h);
+      const hue = random(0,360);
+      
+      
+      for(let i=0;i<40;i++){
+        particles.push({x,y,vx:random(-3,3),vy:random(-5,-1),alpha:1,color:`hsl(${hue},100%,60%)`});
+      }
+    }
+
+    function render(){
+      ctx.fillStyle = 'rgba(0,0,0,0.15)';
+      ctx.fillRect(0,0,w,h);
+      for(let i=0;i<particles.length;i++){
+        const p = particles[i];
+        p.x+=p.vx; p.y+=p.vy; p.vy+=0.05; p.alpha-=0.01;
+        if(p.alpha<=0){particles.splice(i,1); i--; continue;}
+        ctx.globalAlpha=p.alpha;
+        ctx.fillStyle=p.color;
+        
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,2,0,Math.PI*2); ctx.fill();//change 
+      }
+      ctx.globalAlpha=1;
+      if(Math.random()<0.05) createFirework();
+      requestAnimationFrame(render);
+    }
+    render();
+    
+    
+    
+    
+
+    function flipCard(){
+      const name = document.getElementById('nameInput').value.trim();
+      if(name==="") { alert("Please enter your name!"); return; }
+      
+      const card = document.getElementById('card');
+      const messageDiv = document.getElementById('message');
+      messageDiv.innerHTML = `Happy Diwali, ${name}!<br><br><br>Wishing you joy, light, and happiness! 🎇`;
+      card.classList.add('flipped');
+    }
+
+    const countdownDiv = document.getElementById('countdown');
+    const diwaliDate = new Date("2025-10-20T00:00:00");
+    function updateCountdown(){
+      const now = new Date();
+      const diff = diwaliDate - now;
+      if(diff<=0){countdownDiv.innerHTML="It's Diwali today! Celebrate!"; return;}
+      const days=Math.floor(diff/(1000*60*60*24));
+      const hours=Math.floor((diff/(1000*60*60))%24);
+      const mins=Math.floor((diff/(1000*60))%60);
+      countdownDiv.innerHTML=`⏳ Diwali in ${days}d ${hours}h ${mins}m`;
+    }
+    
+    
+    
+    
+    
+    updateCountdown();
+    setInterval(updateCountdown,60000);
+  </script>
+</body>
+</html>
