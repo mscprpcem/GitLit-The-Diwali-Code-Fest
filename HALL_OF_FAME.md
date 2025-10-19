@@ -17,6 +17,7 @@ Here are the amazing developers whose contributions lit up this Diwali Code Fest
 | **Munazir Ansari** | [@Munazir151](https://github.com/Munazir151) | [HappyDiwali.html](submissions/Munazir%20Ansari/HappyDiwali.html) |  HTML | ✅ Merged |
 | **Vansh Hedaoo** | [@vanshhedaoo29](https://github.com/vanshhedaoo29) | [Diwali.html](submissions/Vansh%20Hedaoo/Diwali.html) |  HTML | ✅ Merged |
 | **Roshani Chandak** | [@roshanichandak4-tech](https://github.com/roshanichandak4-tech) | [diwali.java](submissions/ROSHANICHANDAK/diwali) |  Java | ✅ Merged |
+| **Aditi Deshmukh** | [@aditideshmukh36123-glitch](https://github.com/aditideshmukh36123-glitch) | [index.html](submissions/Aditi%20Deshmukh/index.html) |  HTML | ✅ Merged |
 
 
 > 🪔 **Note:** Once your Pull Request (PR) is merged, your name will appear here automatically in the next update!
