@@ -19,6 +19,8 @@ Here are the amazing developers whose contributions lit up this Diwali Code Fest
 | **Roshani Chandak** | [@roshanichandak4-tech](https://github.com/roshanichandak4-tech) | [diwali.java](submissions/ROSHANICHANDAK/diwali) |  Java | ✅ Merged |
 | **Aditi Deshmukh** | [@aditideshmukh36123-glitch](https://github.com/aditideshmukh36123-glitch) | [index.html](submissions/Aditi%20Deshmukh/index.html) |  HTML | ✅ Merged |
 | **Dhiraj Chaudhari** | [@dev-dhiraj01](https://github.com/dev-dhiraj01) | [HappyDiwali.html](submissions/DhirajChaudhari/HappyDiwali.html) |  HTML | ✅ Merged |
+| **Khushi Saraswat** | [@Khushi-Saraswat](https://github.com/Khushi-Saraswat) | [Diwali.java](submissions/Khushi%20Saraswat/Diwali.java) |  Java | ✅ Merged |
+| **Pranav Kedar** | [@pranavkedar31](https://github.com/pranavkedar31) | [diwali.py](submissions/pranavkedar/diwali.py) |  Python| ✅ Merged |
 
 
 > 🪔 **Note:** Once your Pull Request (PR) is merged, your name will appear here automatically in the next update!
