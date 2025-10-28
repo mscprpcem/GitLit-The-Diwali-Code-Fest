@@ -5,7 +5,6 @@
 #include <ctime>
 using namespace std;
 
-// ANSI color codes
 string colors[] = {
     "\033[31m", "\033[33m", "\033[32m", "\033[36m", "\033[35m", "\033[34m"
 };
@@ -15,7 +14,6 @@ const string CLEAR = "\033[2J\033[H";
 const int WIDTH = 150;
 const int HEIGHT = 35;
 
-// ASCII Art for "HAPPY DIWALI"
 string banner[] = {
 "##   ##    ###    #####   #####   ##   ##       #####   ##  ##     ##    ###    ##       ## ",
 "##   ##   ## ##   ##  ##  ##  ##   ## ##        ##  ##  ##  ##     ##   ## ##   ##       ## ",
@@ -24,17 +22,14 @@ string banner[] = {
 "##   ##  ##   ##  ##      ##        ###         #####   ##   ### ###   ##   ##  #######  ## "
 };
 
-// Firework particles (now non-accumulating)
 void print_fireworks(int color_index) {
     string sparks[4] = {"*", "o", ".", "+"};
 
-    // Clear only the firework area before redrawing
     for (int y = 2; y < 8; y++) {
         cout << "\033[" << y << ";1H" << string(WIDTH, ' ');
     }
 
-    // Draw new sparks each frame
-    for (int i = 0; i < 8; i++) { // moderate density
+    for (int i = 0; i < 8; i++) { 
         int x = rand() % (WIDTH - 10) + 5;
         int y = rand() % 6 + 2;
         cout << "\033[" << y << ";" << x << "H"
@@ -42,7 +37,6 @@ void print_fireworks(int color_index) {
     }
 }
 
-// Banner in the center
 void print_banner(int color_index) {
     int start_y = 10;
     int start_x = 20;
@@ -52,7 +46,6 @@ void print_banner(int color_index) {
     }
 }
 
-// Diyas flickering at the bottom
 void print_diyas(int color_index, bool flip) {
     int base_y = HEIGHT - 4;
     string flame = flip ? "^" : "'";
@@ -84,7 +77,7 @@ int main() {
         print_banner(frame);
         print_diyas(frame, flip);
         flip = !flip;
-        this_thread::sleep_for(chrono::milliseconds(120)); // smooth timing
+        this_thread::sleep_for(chrono::milliseconds(120)); 
     }
 
     cout << "\033[" << (HEIGHT + 1) << ";1H" << colors[3]
