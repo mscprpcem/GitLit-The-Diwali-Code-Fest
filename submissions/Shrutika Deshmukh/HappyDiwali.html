@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Diwali - Festival of Lights</title>
+    <meta name="description" content="Celebrate Diwali with an interactive festival of lights animation">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a0033 0%, #0d001a 50%, #1a0033 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            color: #fff;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            background: linear-gradient(135deg, #ffd700 0%, #ffb347 25%, #ff69b4 50%, #ff1493 75%, #ffd700 100%);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)) 
+                    drop-shadow(0 0 40px rgba(255, 105, 180, 0.6))
+                    drop-shadow(0 0 60px rgba(255, 20, 147, 0.4));
+            animation: glow 3s ease-in-out infinite alternate, gradientShift 8s ease infinite;
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)) 
+                        drop-shadow(0 0 40px rgba(255, 105, 180, 0.6));
+            }
+            to {
+                filter: drop-shadow(0 0 30px rgba(255, 215, 0, 1)) 
+                        drop-shadow(0 0 60px rgba(255, 105, 180, 0.9))
+                        drop-shadow(0 0 90px rgba(255, 20, 147, 0.7));
+            }
+        }
+
+    .subtitle {
+        font-size: 1.5em;
+        color: gold;
+        margin-bottom: 50px;
+        text-shadow: 0 0 10px gold;
+    }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    .diyas-container {
+        position: fixed;
+        bottom: 3%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 3rem;  
+        flex-wrap: nowrap;
+        pointer-events: none;
+        z-index: 3;
+        animation: glowRow 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowRow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px #ffcc00) drop-shadow(0 0 20px #ff6600);
+            }
+            50% {
+                filter: drop-shadow(0 0 25px #ffd700) drop-shadow(0 0 40px #ff3399);
+            }
+        }
+
+
+        .diya {
+            position: relative;
+            width: 80px;
+            height: 60px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .diya:nth-child(1) { animation-delay: 0s; }
+        .diya:nth-child(2) { animation-delay: 0.5s; }
+        .diya:nth-child(3) { animation-delay: 1s; }
+        .diya:nth-child(4) { animation-delay: 1.5s; }
+        .diya:nth-child(5) { animation-delay: 2s; }
+        .diya:nth-child(6) { animation-delay: 1.5s; }
+        .diya:nth-child(7) { animation-delay: 2s; }
+       
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .diya-base {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 30px;
+            background: linear-gradient(180deg, #ff6600 0%, #cc3300 100%);
+            border-radius: 0 0 35px 35px;
+            box-shadow: 
+                0 5px 15px rgba(255, 102, 0, 0.6),
+                inset 0 -5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .diya-base::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65px;
+            height: 10px;
+            background: linear-gradient(180deg, #ffa500 0%, #ff6600 100%);
+            border-radius: 50%;
+        }
+
+        .flame {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 35px;
+            background: linear-gradient(180deg, #ffff00 0%, #ffa500 50%, #ff6600 100%);
+            border-radius: 50% 50% 20% 20%;
+            animation: flicker 0.2s ease-in-out infinite alternate;
+            filter: blur(1px);
+            box-shadow: 
+                0 0 20px #ffff00,
+                0 0 40px #ffa500,
+                0 0 60px #ff6600;
+        }
+
+        .flame::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 20px;
+            background: linear-gradient(180deg, #ffff99 0%, #ffcc00 100%);
+            border-radius: 50% 50% 20% 20%;
+            filter: blur(0.5px);
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1, 1); }
+            50% { transform: translateX(-50%) scale(0.95, 1.05); }
+            100% { transform: translateX(-50%) scale(1.05, 0.95); }
+        }
+
+        #rangoli-canvas {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.9;
+        }
+
+        .floating-message {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: rgba(255, 215, 0, 0.9);
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+            animation: floatGlow 4s ease-in-out infinite;
+            pointer-events: none;
+            font-style: italic;
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes floatGlow {
+            0%, 100% {
+                opacity: 0.6;
+                transform: translateX(-50%) translateY(0px);
+                text-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(-10px);
+                text-shadow: 0 0 40px rgba(255, 215, 0, 1), 0 0 60px rgba(255, 105, 180, 0.9);
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .diyas-container {
+                gap: 1.5rem;
+            }
+            .diya {
+                width: 60px;
+                height: 45px;
+            }
+            .diya-base {
+                width: 50px;
+                height: 22px;
+            }
+            .flame {
+                width: 15px;
+                height: 26px;
+                top: -22px;
+            }
+            .floating-message {
+                font-size: 1rem;
+            }
+        }
+        .title {
+            font-size: 5em;
+            color: #ff5ccd;
+            text-shadow: 0 0 30px #ff69b4;
+            margin-bottom: 30px; /* creates gap between text and rangoli */
+        }
+
+        .rangoli {
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <canvas id="rangoli-canvas"></canvas>
+    
+    <div class="content">
+        <p class="subtitle">✨ Festival of Lights ✨</p>
+        <h1>Happy Diwali</h1>
+        <div class="diyas-container">
+            <div class="diya">
+                <div class="flame"></div>
+                <div class="diya-base"></div>
+            </div>
+            <div class="diya">
+                <div class="flame"></div>
+                <div class="diya-base"></div>
+            </div>
+            <div class="diya">
+                <div class="flame"></div>
+                <div class="diya-base"></div>
+            </div>
+            <div class="diya">
+                <div class="flame"></div>
+                <div class="diya-base"></div>
+            </div>
+            <div class="diya">
+                <div class="flame"></div>
+                <div class="diya-base"></div>
+            </div>
+            <div class="diya">
+                <div class="flame"></div>
+                <div class="diya-base"></div>
+            </div>
+            <div class="diya">
+                <div class="flame"></div>
+                <div class="diya-base"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const rangoliCanvas = document.getElementById('rangoli-canvas');
+        const rangoliCtx = rangoliCanvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        rangoliCanvas.width = 400;
+        rangoliCanvas.height = 400;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Mouse trail sparkles
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let mouseTrail = [];
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Particle system
+        class Particle {
+            constructor(x, y, type = 'sparkle') {
+                this.x = x;
+                this.y = y;
+                this.type = type;
+                
+                if (type === 'sparkle') {
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.life = 100;
+                    this.size = Math.random() * 3 + 1;
+                    this.color = ['#ffd700', '#ffcc00', '#ff9900', '#ff6600'][Math.floor(Math.random() * 4)];
+                } else if (type === 'firework') {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 5 + 3;
+                    this.vx = Math.cos(angle) * speed;
+                    this.vy = Math.sin(angle) * speed;
+                    this.life = 100;
+                    this.size = Math.random() * 3 + 2;
+                    this.color = ['#ff0000', '#ff6600', '#ffcc00', '#ffd700', '#ff3300', '#ff9900', '#ff69b4', '#ff1493'][Math.floor(Math.random() * 8)];
+                    this.gravity = 0.05;
+                } else if (type === 'trail') {
+                    this.vx = (Math.random() - 0.5) * 2;
+                    this.vy = (Math.random() - 0.5) * 2;
+                    this.life = 60;
+                    this.size = Math.random() * 4 + 2;
+                    this.color = ['#ffd700', '#ff69b4', '#ffb347', '#ff1493'][Math.floor(Math.random() * 4)];
+                }
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                if (this.type === 'firework') {
+                    this.vy += this.gravity;
+                    this.vx *= 0.99;
+                    this.vy *= 0.99;
+                }
+                
+                this.life -= 1;
+            }
+
+            draw() {
+                ctx.globalAlpha = this.life / 100;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Glow effect
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                
+                ctx.globalAlpha = 1;
+            }
+
+            isDead() {
+                return this.life <= 0;
+            }
+        }
+
+        let particles = [];
+
+        // Create continuous sparkles
+        function createSparkles() {
+            if (Math.random() < 0.3) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                particles.push(new Particle(x, y, 'sparkle'));
+            }
+        }
+
+        // Create mouse trail sparkles
+        function createMouseTrail() {
+            if (Math.random() < 0.6) {
+                particles.push(new Particle(mouseX, mouseY, 'trail'));
+            }
+        }
+
+        // Create firework explosion
+        function createFirework(x, y) {
+            const particleCount = 120;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle(x, y, 'firework'));
+            }
+        }
+
+        // Rangoli mandala animation
+        let rangoliAngle = 0;
+        let rangoliScale = 1;
+        let rangoliGrowing = true;
+
+        function drawRangoli() {
+            const centerX = rangoliCanvas.width / 2;
+            const centerY = rangoliCanvas.height / 2;
+            
+            rangoliCtx.clearRect(0, 0, rangoliCanvas.width, rangoliCanvas.height);
+            rangoliCtx.save();
+            rangoliCtx.translate(centerX, centerY);
+            rangoliCtx.rotate(rangoliAngle);
+            
+            // Bloom animation
+            if (rangoliGrowing) {
+                rangoliScale += 0.005;
+                if (rangoliScale > 1.3) rangoliGrowing = false;
+            } else {
+                rangoliScale -= 0.005;
+                if (rangoliScale < 0.8) rangoliGrowing = true;
+            }
+            
+            rangoliCtx.scale(rangoliScale, rangoliScale);
+            
+            const colors = ['#ff6600', '#ffd700', '#ff69b4', '#ff1493', '#ffb347', '#ff3300', '#00ffff', '#7fff00'];
+            
+            // Central circle
+            rangoliCtx.beginPath();
+            rangoliCtx.arc(0, 0, 15, 0, Math.PI * 2);
+            rangoliCtx.fillStyle = '#ffd700';
+            rangoliCtx.fill();
+            rangoliCtx.strokeStyle = '#ff6600';
+            rangoliCtx.lineWidth = 3;
+            rangoliCtx.stroke();
+            
+            // Layer 1: Inner lotus petals (8 petals)
+            const petals1 = 8;
+            for (let i = 0; i < petals1; i++) {
+                const angle = (Math.PI * 2 / petals1) * i;
+                rangoliCtx.save();
+                rangoliCtx.rotate(angle);
+                
+                rangoliCtx.beginPath();
+                rangoliCtx.moveTo(0, 20);
+                rangoliCtx.bezierCurveTo(15, 25, 20, 35, 15, 50);
+                rangoliCtx.bezierCurveTo(10, 55, 0, 55, 0, 50);
+                rangoliCtx.bezierCurveTo(0, 55, -10, 55, -15, 50);
+                rangoliCtx.bezierCurveTo(-20, 35, -15, 25, 0, 20);
+                
+                const gradient1 = rangoliCtx.createLinearGradient(0, 20, 0, 55);
+                gradient1.addColorStop(0, colors[0]);
+                gradient1.addColorStop(1, colors[1]);
+                rangoliCtx.fillStyle = gradient1;
+                rangoliCtx.fill();
+                rangoliCtx.strokeStyle = colors[1];
+                rangoliCtx.lineWidth = 2;
+                rangoliCtx.stroke();
+                
+                rangoliCtx.restore();
+            }
+            
+            // Layer 2: Paisley patterns (8 patterns)
+            for (let i = 0; i < 8; i++) {
+                const angle = (Math.PI * 2 / 8) * i + Math.PI / 8;
+                rangoliCtx.save();
+                rangoliCtx.rotate(angle);
+                
+                rangoliCtx.beginPath();
+                rangoliCtx.moveTo(0, 60);
+                rangoliCtx.bezierCurveTo(25, 65, 30, 80, 25, 95);
+                rangoliCtx.bezierCurveTo(20, 105, 10, 105, 5, 100);
+                rangoliCtx.bezierCurveTo(0, 95, 0, 85, 5, 80);
+                rangoliCtx.bezierCurveTo(10, 75, 5, 70, 0, 65);
+                rangoliCtx.closePath();
+                
+                const gradient2 = rangoliCtx.createRadialGradient(10, 80, 0, 10, 80, 30);
+                gradient2.addColorStop(0, colors[2]);
+                gradient2.addColorStop(1, colors[3]);
+                rangoliCtx.fillStyle = gradient2;
+                rangoliCtx.fill();
+                rangoliCtx.strokeStyle = colors[3];
+                rangoliCtx.lineWidth = 2;
+                rangoliCtx.stroke();
+                
+                // Decorative inner curve
+                rangoliCtx.beginPath();
+                rangoliCtx.arc(8, 85, 8, 0, Math.PI * 2);
+                rangoliCtx.strokeStyle = colors[1];
+                rangoliCtx.lineWidth = 1.5;
+                rangoliCtx.stroke();
+                
+                rangoliCtx.restore();
+            }
+            
+            // Layer 3: Outer lotus petals (16 petals)
+            const petals3 = 16;
+            for (let i = 0; i < petals3; i++) {
+                const angle = (Math.PI * 2 / petals3) * i;
+                rangoliCtx.save();
+                rangoliCtx.rotate(angle);
+                
+                rangoliCtx.beginPath();
+                rangoliCtx.moveTo(0, 105);
+                rangoliCtx.bezierCurveTo(20, 110, 25, 125, 20, 145);
+                rangoliCtx.bezierCurveTo(15, 155, 5, 158, 0, 155);
+                rangoliCtx.bezierCurveTo(-5, 158, -15, 155, -20, 145);
+                rangoliCtx.bezierCurveTo(-25, 125, -20, 110, 0, 105);
+                
+                const gradient3 = rangoliCtx.createLinearGradient(0, 105, 0, 155);
+                gradient3.addColorStop(0, colors[4]);
+                gradient3.addColorStop(0.5, colors[5]);
+                gradient3.addColorStop(1, colors[0]);
+                rangoliCtx.fillStyle = gradient3;
+                rangoliCtx.fill();
+                rangoliCtx.strokeStyle = colors[0];
+                rangoliCtx.lineWidth = 2;
+                rangoliCtx.stroke();
+                
+                // Inner line detail
+                rangoliCtx.beginPath();
+                rangoliCtx.moveTo(0, 110);
+                rangoliCtx.lineTo(0, 150);
+                rangoliCtx.strokeStyle = colors[1];
+                rangoliCtx.lineWidth = 1;
+                rangoliCtx.stroke();
+                
+                rangoliCtx.restore();
+            }
+            
+            // Layer 4: Diamond decorations (12 diamonds)
+            for (let i = 0; i < 12; i++) {
+                const angle = (Math.PI * 2 / 12) * i;
+                const x = Math.cos(angle) * 130;
+                const y = Math.sin(angle) * 130;
+                
+                rangoliCtx.save();
+                rangoliCtx.translate(x, y);
+                rangoliCtx.rotate(angle + Math.PI / 2);
+                
+                rangoliCtx.beginPath();
+                rangoliCtx.moveTo(0, -8);
+                rangoliCtx.lineTo(5, 0);
+                rangoliCtx.lineTo(0, 8);
+                rangoliCtx.lineTo(-5, 0);
+                rangoliCtx.closePath();
+                
+                rangoliCtx.fillStyle = colors[6];
+                rangoliCtx.fill();
+                rangoliCtx.strokeStyle = colors[7];
+                rangoliCtx.lineWidth = 2;
+                rangoliCtx.stroke();
+                
+                rangoliCtx.restore();
+            }
+            
+            // Layer 5: Outer decorative arcs (8 arcs)
+            for (let i = 0; i < 8; i++) {
+                const angle = (Math.PI * 2 / 8) * i;
+                rangoliCtx.save();
+                rangoliCtx.rotate(angle);
+                
+                rangoliCtx.beginPath();
+                rangoliCtx.arc(0, 160, 25, -Math.PI / 3, Math.PI / 3);
+                rangoliCtx.strokeStyle = colors[(i % colors.length)];
+                rangoliCtx.lineWidth = 4;
+                rangoliCtx.stroke();
+                
+                // Dots at arc ends
+                rangoliCtx.beginPath();
+                rangoliCtx.arc(Math.cos(-Math.PI / 3) * 25, 160 + Math.sin(-Math.PI / 3) * 25, 4, 0, Math.PI * 2);
+                rangoliCtx.fillStyle = colors[(i + 1) % colors.length];
+                rangoliCtx.fill();
+                
+                rangoliCtx.beginPath();
+                rangoliCtx.arc(Math.cos(Math.PI / 3) * 25, 160 + Math.sin(Math.PI / 3) * 25, 4, 0, Math.PI * 2);
+                rangoliCtx.fillStyle = colors[(i + 2) % colors.length];
+                rangoliCtx.fill();
+                
+                rangoliCtx.restore();
+            }
+            
+            rangoliCtx.restore();
+            rangoliAngle += 0.005;
+        }
+
+        // Animation loop
+        function animate() {
+            ctx.fillStyle = 'rgba(26, 0, 51, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            createSparkles();
+            createMouseTrail();
+            drawRangoli();
+
+            particles = particles.filter(particle => {
+                particle.update();
+                particle.draw();
+                return !particle.isDead();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // Start animation
+        animate();
+
+        // Create initial fireworks burst after a delay
+        setTimeout(() => {
+            createFirework(canvas.width / 2, canvas.height / 3);
+        }, 1000);
+
+        // More frequent automatic fireworks
+        setInterval(() => {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * (canvas.height * 0.5);
+            createFirework(x, y);
+        }, 3000);
+
+        // Additional random bursts
+        setInterval(() => {
+            if (Math.random() < 0.5) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * (canvas.height * 0.7);
+                createFirework(x, y);
+            }
+        }, 1500);
+    </script>
+</body>
+</html>
